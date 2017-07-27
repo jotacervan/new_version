@@ -1,0 +1,37 @@
+<div>
+    <a class="hiddenanchor" id="signup"></a>
+    <a class="hiddenanchor" id="signin"></a>
+
+    <div class="login_wrapper">
+      <div class="animate form login_form">
+        <section class="login_content">
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <h1>Sindicatos BR</h1>
+            <div>
+              <%= f.email_field :email, :class => 'form-control', :placeholder => 'Email', autofocus: true %>
+            </div>
+            <div>
+              <%= f.password_field :password, :class => 'form-control', :placeholder => 'Senha', autocomplete: "off" %>
+            </div>
+            <div>
+              <%= f.submit "Log in", :class => 'btn btn-default submit' %>
+              <% if devise_mapping.rememberable? -%>
+                <div class="field">
+                  <%= f.check_box :remember_me %> &nbsp;
+                  <%= f.label :lembrar_me %>
+                </div>
+              <% end -%>
+            </div>
+
+            <div class="clearfix"></div>
+            
+            <div class="separator">
+              <div>
+                <p>©2017 All Rights Reserved. Sindicatos BR</p>
+              </div>
+            </div>
+          <% end %>
+        </section>
+      </div>
+    </div>
+  </div>

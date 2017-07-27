@@ -24,7 +24,7 @@ development:
         #     - use: web
 
         # The name of the user for authentication.
-        user: 'mongo'
+        # user: 'mongo'
 
         # The password of the user for authentication.
         # password: 'password'

@@ -13,10 +13,10 @@
 //= require rails-ujs
 //= require_tree .
 //= require jquery
+//= require jquery_ujs
 //= require bootstrap-sprockets
 //= require select2
 //= require sweetalert2
 //= require sweet-alert2-rails
 //= require gentelella
 //= require gentelella-custom
-
