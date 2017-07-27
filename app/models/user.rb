@@ -78,7 +78,7 @@ class User
   validates_attachment_size :doc_front, :less_than => 5.megabytes
   validates_attachment_content_type :doc_front, :content_type => ['image/jpeg', 'image/png', 'image/jpg']
 
-  
+
   has_mongoid_attached_file :doc_back, 
     :styles => { :medium => "320x320>", :thumb => "160x160#" },
     :storage        => :s3,
@@ -95,7 +95,7 @@ class User
   end
 
   def self.mapuser (u)
-    { :id => u.id.to_s, :name => u.name, :udid => u.udid, :status => u.status, :picture => u.picture, :doc_front => u.doc_front, :doc_back => u.doc_back, :afiliation => u.afiliation, :rg => u.rg, :cpf => u.cpf, :syndicate_name => u.syndicate.name, :cep => u.cep, :state => u.state, :city => u.city, :neighborhood => u.neighborhood, :street => u.street, :number => u.number, :complement => u.complement, :accepted_terms => u.accepted_terms  }
+    { :id => u.id.to_s, :name => u.name, :udid => u.udid, :status => u.status, :picture => u.picture, :doc_front => u.doc_front, :doc_back => u.doc_back, :afiliation => u.afiliation, :rg => u.rg, :cpf => u.cpf, :cep => u.cep, :state => u.state, :city => u.city, :neighborhood => u.neighborhood, :street => u.street, :number => u.number, :complement => u.complement, :accepted_terms => u.accepted_terms  }
   end
   
 end
