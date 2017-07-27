@@ -1,0 +1,2 @@
+module Webservices::SyndicateHelper
+end

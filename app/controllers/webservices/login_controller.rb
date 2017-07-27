@@ -73,6 +73,7 @@ class Webservices::LoginController < WebservicesController
   	param :password, String, :desc => 'Senha', :required => true, :missing_message => lambda { "Senha é requerido" }
   	param :udid, String, :desc => 'UDID', :required => true, :missing_message => lambda { "UDID é requerido" }
   	param :cpf, String, :desc => 'Ex: 999.999.999-99', :required => true, :missing_message => lambda { "CPF requerido" }
+  	param :rg, String, :desc => 'Ex: 99.999.999-9', :required => true, :missing_message => lambda { "RG requerido" }
   	error 403, "CPF já cadastrado em nosso sistema"
   	error 500, "Erro desconhecido"
   	example "Exemplo de retorno quando cadastro for realizado com sucesso
@@ -118,6 +119,7 @@ class Webservices::LoginController < WebservicesController
 			u.name = params[:name] 
 			u.email = params[:email].nil? ? '' : params[:email]
 			u.cpf = params[:cpf]
+			u.rg = params[:rg]
 			u.password = params[:password]
 			u.password_confirmation = params[:password]
 			u.udid = params[:udid]
