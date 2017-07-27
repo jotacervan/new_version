@@ -116,7 +116,7 @@ class Webservices::LoginController < WebservicesController
 		else
 			u = User.new()
 			u.name = params[:name] 
-			u.email = params[:email].nil? '' nil : params[:email]
+			u.email = params[:email].nil? ? '' : params[:email]
 			u.cpf = params[:cpf]
 			u.password = params[:password]
 			u.password_confirmation = params[:password]
@@ -247,7 +247,7 @@ class Webservices::LoginController < WebservicesController
   	}"
 	def update_photos
 		u = User.find(params[:id]) rescue nil
-		
+
 		if u.nil?
 			render :json => { :message => 'Usuario não encontrado no sistema' }, :status => 404
 		else
