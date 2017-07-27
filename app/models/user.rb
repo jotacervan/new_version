@@ -78,7 +78,7 @@ class User
   validates_attachment_size :doc_front, :less_than => 5.megabytes
   validates_attachment_content_type :doc_front, :content_type => ['image/jpeg', 'image/png', 'image/jpg']
 
-
+  
   has_mongoid_attached_file :doc_back, 
     :styles => { :medium => "320x320>", :thumb => "160x160#" },
     :storage        => :s3,

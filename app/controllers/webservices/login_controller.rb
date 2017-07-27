@@ -126,7 +126,7 @@ class Webservices::LoginController < WebservicesController
 			u.status = 1
 			u.save(validate: false)
 			
-			render :json => { :message => 'Cadastro Realizado com Sucesso', :user => User.mapuser(u) }
+			render :json => { :message => 'Cadastro Realizado com Sucesso' }
 		end
 	end
 
