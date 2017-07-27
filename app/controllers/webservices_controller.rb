@@ -1,4 +1,5 @@
 class WebservicesController < ApplicationController
+	skip_before_action :verify_authenticity_token
 	before_action :check_login, except: [:signin,:signup,:update_photos,:update_address]
 	
 	def check_login
