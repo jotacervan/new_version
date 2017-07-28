@@ -342,10 +342,11 @@ class Webservices::LoginController < WebservicesController
     error 404, "Usuario não encontrado no sistema"
     error 500, "Erro desconhecido"
     example "Exemplo de retorno quando dados forem inseridos com sucesso 
-      
+    
     { 
       :message => 'Dados inseridos com sucesso',
         :user => { 
+
           :id => 192863tgv9146v4910y1b4,
 			:name => 'Fulano de Tal', 
 			:udid => 123123, 
@@ -367,13 +368,16 @@ class Webservices::LoginController < WebservicesController
 			:syndicate_name => 'Nome do Sindicato',
 			:word_city => 'Cidade onde trabalha',
 			:accepted_terms => true,
+
         }
+
     }"
     example "Exemplo de retorno quando usuario não for encontrado 
 
     { 
       :message => 'Usuario não encontrado no sistema'
-    }"
+    }
+    "
     def set_payment
       u = User.find(params[:id]) rescue nil
 
