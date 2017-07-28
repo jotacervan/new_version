@@ -301,7 +301,7 @@ class Webservices::LoginController < WebservicesController
       	}
   	}"
   	example "Exemplo de retorno quando usuario não for encontrado 
-  	
+
   	{ 
   		:message => 'Usuario não encontrado no sistema'
   	}"
@@ -330,5 +330,62 @@ class Webservices::LoginController < WebservicesController
   			render :json => { :message => 'Questão inserida com sucesso', :user => User.mapuser(u) }
   		end
   	end
+
+  	# =============================================================
+    #                    SET PAYMENT METHOD
+    # =============================================================
+    api :POST, '/login/set_payment', "Set Payment"
+    formats ['json']
+    param :id, String, :desc => 'Ex: 1234123hb14b1234i12,
+ ID é encontrado no json de retorno param[:user][:id]', :required => true, :missing_message => lambda { "id é requerido" }
+
+    error 404, "Usuario não encontrado no sistema"
+    error 500, "Erro desconhecido"
+    example "Exemplo de retorno quando dados forem inseridos com sucesso 
+      
+    { 
+      :message => 'Dados inseridos com sucesso',
+        :user => { 
+          :id => 192863tgv9146v4910y1b4,
+			:name => 'Fulano de Tal', 
+			:udid => 123123, 
+			:status => 1,
+			:picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
+			:doc_front => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
+			:doc_back => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
+			:afiliation => 'Mae', 
+			:cpf => '999.999.999-99', 
+			:rg => '99.999.999-9',  
+			:cep => '13413-324', 
+			:state => 'SP',
+			:city => 'São Paulo',
+			:neighborhood => 'Pinheiros',
+			:street => 'Rua teste',
+			:number => '123',
+			:complement => 'apto 20',
+			:education_level => 'Bacharel', 
+			:syndicate_name => 'Nome do Sindicato',
+			:word_city => 'Cidade onde trabalha',
+			:accepted_terms => true,
+        }
+    }"
+    example "Exemplo de retorno quando usuario não for encontrado 
+
+    { 
+      :message => 'Usuario não encontrado no sistema'
+    }"
+    def set_payment
+      u = User.find(params[:id]) rescue nil
+
+      if u.nil?
+        render :json => { :message => 'Usuario não encontrado no sistema' }, :status => 404
+      else
+        u.payment = params[:payment].nil? ? '' : params[:payment]
+        u.status = 5
+        u.save(validate: false)
+        
+        render :json => { :message => 'Dados inserido com sucesso', :user => User.mapuser(u) }
+      end
+    end
 
 end

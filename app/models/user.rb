@@ -51,6 +51,7 @@ class User
   field :status,                 type: Integer, default: 1
   field :udid,                   type: String
   field :accepted_terms,         type: Mongoid::Boolean, default: false
+  field :payment,         type: Mongoid::Boolean, default: false
 
 
   belongs_to :syndicate, optional: :true
