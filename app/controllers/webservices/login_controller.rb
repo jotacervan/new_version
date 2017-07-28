@@ -262,4 +262,73 @@ class Webservices::LoginController < WebservicesController
 		end
 	end
 
+	# =============================================================
+	# 			         UPDATE QUESTION METHOD
+	# =============================================================
+	api :POST, '/login/update_question', "Update Question From User"
+  	formats ['json']
+  	param :id, String, :desc => 'Ex: 1234123hb14b1234i12,
+ ID é encontrado no json de retorno param[:user][:id]', :required => true, :missing_message => lambda { "id é requerido" }
+    param :questions, Array, :desc => 'Questões de segurança'
+  	error 404, "Usuario não encontrado no sistema"
+  	error 500, "Erro desconhecido"
+  	example "Exemplo de retorno quando fotos forem inserida com sucesso 
+  	
+  	{ 
+            :message => 'Questão inserida com sucesso',
+            :user => { 
+                :id => 192863tgv9146v4910y1b4,
+			:name => 'Fulano de Tal', 
+			:udid => 123123, 
+			:status => 1,
+			:picture => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
+			:doc_front => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
+			:doc_back => 'http://s3.amazonaws.com/TorcidaLegal/pictures/59484ad9a3f9f30004362d6b/original.png?1497909989', 
+			:afiliation => 'Mae', 
+			:cpf => '999.999.999-99', 
+			:rg => '99.999.999-9',  
+			:cep => '13413-324', 
+			:state => 'SP',
+			:city => 'São Paulo',
+			:neighborhood => 'Pinheiros',
+			:street => 'Rua teste',
+			:number => '123',
+			:complement => 'apto 20',
+			:education_level => 'Bacharel', 
+			:syndicate_name => 'Nome do Sindicato',
+			:word_city => 'Cidade onde trabalha',
+			:accepted_terms => true,
+      	}
+  	}"
+  	example "Exemplo de retorno quando usuario não for encontrado 
+  	
+  	{ 
+  		:message => 'Usuario não encontrado no sistema'
+  	}"
+
+    example "Exemplo de envio do array de questões
+
+    {
+      :questions => [
+          { :question => 'Pergunta 1?', :answer => 'Resposta 1' },
+          { :question => 'Pergunta 2?', :answer => 'Resposta 2' },
+          { :question => 'Pergunta 3?', :answer => 'Resposta 3' }
+      ]
+    }"
+  	def update_question
+  		u = User.find(params[:id]) rescue nil
+
+  		if u.nil?
+  			render :json => { :message => 'Usuario não encontrado no sistema' }, :status => 404
+  		else
+  			params[:questions].each do |q|
+          u.questions.create(:question => q[:question], :answer => q[:answer])
+        end
+  			u.status = 4
+  			u.save(validate: false)
+  			
+  			render :json => { :message => 'Questão inserida com sucesso', :user => User.mapuser(u) }
+  		end
+  	end
+
 end

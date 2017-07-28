@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   	post '/login/signup'
   	post '/login/update_address'
   	post '/login/update_photos'
+    post '/login/update_question'
   	post '/syndicate/getSyndicates'
   end
 end
