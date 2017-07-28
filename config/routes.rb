@@ -9,5 +9,7 @@ Rails.application.routes.draw do
   	post '/login/signin'
   	post '/login/signup'
   	post '/login/update_address'
+  	post '/login/update_photos'
+  	post '/syndicate/getSyndicates'
   end
 end
